@@ -24,7 +24,14 @@ describe('Select Dropdown List', () => {
 			.should('not.be.checked')
 	})
 
-	it.only('Handling Multiple Checkbox', () => {
+	it('Handling Multiple Checkbox', () => {
 		cy.get('#checkboxes > * > input').check(['option-1', 'option-2'])
+	})
+
+	it('Handling Radio button with disabled option', () => {
+		cy.get('#radio-buttons > input').check('orange').should('be.checked')
+		cy.get('#radio-buttons >:nth-child(5)').click().should('be.checked')
+		cy.get('#radio-buttons').find('[type="radio"]').eq(1).check()
+		cy.get('[value="cabbage"]').should('be.disabled')
 	})
 })
